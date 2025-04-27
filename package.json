@@ -1,0 +1,19 @@
+{
+  "name": "deprem-bot",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "date-fns": "^4.1.0",
+    "dotenv": "^16.3.1",
+    "node-fetch": "^3.3.2",
+    "node-telegram-bot-api": "^0.61.0"
+  }
+}
