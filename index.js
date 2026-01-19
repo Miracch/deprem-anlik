@@ -1,4 +1,4 @@
-// 1. Gerekli modülleri import ediyoruz
+
 import fetch from "node-fetch";
 import TelegramBot from "node-telegram-bot-api";
 import dotenv from "dotenv";
@@ -7,22 +7,22 @@ import fs from "fs/promises";
 import { format } from "date-fns";
 import { tr } from "date-fns/locale/tr";
 
-// 2. Ortam değişkenlerini yüklüyoruz (.env dosyasından)
+
 dotenv.config();
 
-// 3. Telegram botunu başlatıyoruz
+
 const token = "7928408572:AAHlhitvPtIXbEGQTapVDnW145a7UQDDFB0" || "YEDEK_TOKEN";
 const bot = new TelegramBot(token, { polling: true });
 const CHAT_ID = "1742523198" || "SOHBET_ID";
 
-// 4. Yapılandırma ayarları
+
 const CONFIG = {
-  checkIntervalSeconds: 30, // 30 saniyede bir kontrol
-  lastQuakesFile: "last_quakes.json", // Bildirilen depremleri kaydedeceğimiz dosya
-  userSettingsFile: "user-settings.json", // Kullanıcıların şehir seçimlerini tutacağımız dosya
+  checkIntervalSeconds: 30, 
+  lastQuakesFile: "last_quakes.json", 
+  userSettingsFile: "user-settings.json", 
 };
 
-// 5. Şehir listesi
+
 const availableCities = [
   "İstanbul",
   "Kocaeli",
@@ -41,11 +41,11 @@ const availableCities = [
   "Hatay",
 ];
 
-// 6. Hafıza alanları
-let lastCheckedQuakes = new Set();
-const userSelections = {}; // geçici seçim alanı
 
-// 7. Depremleri dosyadan yükleme fonksiyonu
+let lastCheckedQuakes = new Set();
+const userSelections = {}; 
+
+
 async function loadLastCheckedQuakes() {
   try {
     const data = await fs.readFile(CONFIG.lastQuakesFile, "utf-8");
@@ -57,7 +57,7 @@ async function loadLastCheckedQuakes() {
   }
 }
 
-// 8. Depremleri dosyaya kaydetme fonksiyonu
+
 async function saveLastCheckedQuakes() {
   try {
     const ids = Array.from(lastCheckedQuakes);
@@ -67,7 +67,7 @@ async function saveLastCheckedQuakes() {
   }
 }
 
-// 9. Kullanıcı ayarlarını yükleme/kaydetme
+
 async function loadUserSettings() {
   try {
     const data = await fs.readFile(CONFIG.userSettingsFile, "utf-8");
@@ -95,7 +95,7 @@ async function saveUserSettings(chatId, cities) {
   }
 }
 
-// 10. Web sitesinden deprem verilerini çekme
+
 async function getEarthquakeDataFromWeb() {
   try {
     const response = await fetch(
@@ -139,7 +139,7 @@ async function getEarthquakeDataFromWeb() {
   }
 }
 
-// 11. Deprem mesajı formatlama
+
 function formatEarthquakeMessage(quake) {
   return `⚡ *Yeni Deprem* ⚡\n
 📍 *Yer:* ${quake.location}
@@ -149,7 +149,7 @@ function formatEarthquakeMessage(quake) {
 🌎 *Koordinatlar:* ${quake.latitude}, ${quake.longitude}`;
 }
 
-// 12. Depremleri kontrol ve bildirim
+
 async function checkAndNotify() {
   console.log(
     `[${new Date().toLocaleString("tr-TR", {
@@ -265,7 +265,7 @@ bot.on("callback_query", async (query) => {
     });
   }
 });
-// 13. Yeni kullanıcı geldiğinde Hoşgeldin + şehir seçimi
+
 bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text;
@@ -327,7 +327,7 @@ bot.on("message", async (msg) => {
   }
 });
 
-// 14. Botu başlat
+
 (async () => {
   console.log("AFAD Web Deprem Bildirim Botu başlatılıyor...");
 
