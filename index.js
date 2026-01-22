@@ -10,7 +10,6 @@ import { tr } from "date-fns/locale/tr";
 
 dotenv.config();
 
-
 const token = "7928408572:AAHlhitvPtIXbEGQTapVDnW145a7UQDDFB0" || "YEDEK_TOKEN";
 const bot = new TelegramBot(token, { polling: true });
 const CHAT_ID = "1742523198" || "SOHBET_ID";
